@@ -30,13 +30,13 @@ class FetchUrls(threading.Thread):
             req = urllib.request
             try:
                 d = req.urlopen(url)
-            except urllib.URLError as e:
-                print ("URL %s failed: %s" % (url, e.reason))
+            except urllib.error.URLError as e:
+                print("URL %s failed: %s" % (url, e.reason))
             self.lock.acquire()
-            print ('lock acquired by %s' % self.name)
+            print("lock acquired by %s" % self.name)
             self.output.write(str(d.read()))
-            print ('write done by %s' % self.name)
-            print ('lock released by %s' % self.name)
+            print("write done by %s" % self.name)
+            print("lock released by %s" % self.name)
             self.lock.release()
             print ('URL %s fetched by %s' % (url, self.name))
 
